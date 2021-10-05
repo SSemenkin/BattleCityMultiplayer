@@ -1,4 +1,4 @@
-#ifndef BATTLECITYCORE_H
+﻿#ifndef BATTLECITYCORE_H
 #define BATTLECITYCORE_H
 
 #include "BattleCityCore_global.h"

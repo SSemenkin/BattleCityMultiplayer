@@ -7,7 +7,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 
-#include "GraphicsSceneObjects/GameObject.h"
+#include "gameview.h"
 
 
 class Client : public QWidget
@@ -32,7 +32,8 @@ private:
     void connectToServer();
     void getServerReply();
 
-    GameObject *gameObject;
+    QScopedPointer<GameView> m_view;
+
 };
 
 #endif // CLIENT_H

@@ -12,12 +12,10 @@ Client::Client(QWidget *parent) :
 
     m_layout.addWidget(m_lineEdit);
     m_layout.addWidget(m_pushButton);
-    gameObject = new GameObject();
 }
 
 Client::~Client()
 {
-    gameObject->setRequireToDestroy();
 }
 
 void Client::connectToServer()
@@ -29,5 +27,10 @@ void Client::getServerReply()
 {
     QByteArray raw =  m_socket->readAll();
     QString reply = raw;
-
+    if (reply.length() == 1) { // level id
+        m_view.reset(new GameView);
+        m_view.data()->startGameAtLevel(reply.toInt());
+        m_view->showFullScreen();
+        hide();
+    }
 }

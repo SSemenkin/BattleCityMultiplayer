@@ -11,17 +11,30 @@ CONFIG += c++11
 
 SOURCES += \
     GraphicsSceneObjects/GameObject.cpp \
+    GraphicsSceneObjects/staticbody.cpp \
+    GraphicsScenes/gamescene.cpp \
+    GraphicsScenes/menuscene.cpp \
     battlecitycore.cpp \
-    level.cpp
+    gameview.cpp \
+    level.cpp \
+    menutextitem.cpp
 
 HEADERS += \
     BattleCityCore_global.h \
     GraphicsSceneObjects/GameObject.h \
+    GraphicsSceneObjects/staticbody.h \
+    GraphicsScenes/gamescene.h \
+    GraphicsScenes/menuscene.h \
     battlecitycore.h \
-    level.h
+    gameview.h \
+    level.h \
+    menutextitem.h
 
 # Default rules for deployment.
 unix {
     target.path = /usr/lib
 }
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc

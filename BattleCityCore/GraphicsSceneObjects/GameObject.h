@@ -1,6 +1,8 @@
 ﻿#ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
+#include "BattleCityCore_global.h"
+
 #define SWAP_PIXMAPS_DELTA 150
 #define BONUS_DURATION 7000
 #define ENEMY_SWAP_DIRECTION_DELTA 1000
@@ -16,7 +18,7 @@
 #include <QGraphicsScene>
 #include <QDebug>
 
-class GameObject : public QObject, public QGraphicsPixmapItem
+class BATTLECITYCORE_EXPORT GameObject : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:

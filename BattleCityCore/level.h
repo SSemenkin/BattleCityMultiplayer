@@ -1,5 +1,6 @@
 ﻿#ifndef LEVEL_H
 #define LEVEL_H
+#include "BattleCityCore_global.h"
 
 #include <QFile>
 #include <QPointF>
@@ -7,7 +8,7 @@
 
 using LevelStructure = QVector<QString>;
 
-class Level
+class BATTLECITYCORE_EXPORT Level
 {
 public:
     Level(const QString &path);

@@ -5,6 +5,16 @@ GameServer::GameServer(QObject *parent) : QTcpServer(parent)
 
 }
 
+int GameServer::levelId() const
+{
+    return m_levelId;
+}
+
+void GameServer::setLevelId(int levelId)
+{
+    m_levelId = levelId;
+}
+
 void GameServer::incomingConnection(qintptr handle)
 {
     qDebug() << "New client is connected. Handle " << handle;
@@ -15,6 +25,7 @@ void GameServer::incomingConnection(qintptr handle)
     QObject::connect(client, &QTcpSocket::readyRead, this, &GameServer::receiveMessageFromClient);
 
     m_clients.append(client);
+    client->write(QString::number(levelId()).toLatin1());
 }
 
 void GameServer::receiveMessageFromClient()

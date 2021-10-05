@@ -16,11 +16,14 @@ public:
         Fire
     };
 
+    int levelId() const;
+    void setLevelId(int levelId);
 
 protected:
     void incomingConnection(qintptr handle) override;
 private:
     QList<QTcpSocket*> m_clients;
+    int m_levelId;
 private:
     void receiveMessageFromClient();
 };
