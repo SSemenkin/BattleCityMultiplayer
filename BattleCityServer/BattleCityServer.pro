@@ -19,3 +19,13 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     gameserver.h
+
+RESOURCES += \
+    resources.qrc
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../BattleCityCore/release/ -lBattleCityCore
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../BattleCityCore/debug/ -lBattleCityCore
+else:unix: LIBS += -L$$OUT_PWD/../BattleCityCore/ -lBattleCityCore
+
+INCLUDEPATH += $$PWD/../BattleCityCore
+DEPENDPATH += $$PWD/../BattleCityCore
