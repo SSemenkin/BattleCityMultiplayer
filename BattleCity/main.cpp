@@ -1,10 +1,11 @@
-﻿#include <QApplication>
-#include "client.h"
+#include "gameview.h"
+
+#include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Client client;
-    client.show();
+    GameView w;
+    w.show();
     return a.exec();
 }
