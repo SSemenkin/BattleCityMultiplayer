@@ -2,6 +2,7 @@
 #define GAMEVIEW_H
 
 #include <QGraphicsView>
+#include <qamqp/qamqpclient.h>
 
 class GameView : public QGraphicsView
 {
@@ -10,5 +11,6 @@ class GameView : public QGraphicsView
 public:
     GameView(QWidget *parent = nullptr);
     ~GameView();
+
 };
 #endif // GAMEVIEW_H
