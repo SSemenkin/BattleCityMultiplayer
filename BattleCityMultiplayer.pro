@@ -1,5 +1,5 @@
-include(qamqp.pri)
 QT       += core gui
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -11,10 +11,14 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
-    gameview.cpp
+    gameview.cpp \
+    network/server.cpp \
+    network/socket.cpp
 
 HEADERS += \
-    gameview.h
+    gameview.h \
+    network/server.h \
+    network/socket.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -2,7 +2,6 @@
 #define GAMEVIEW_H
 
 #include <QGraphicsView>
-#include <qamqp/qamqpclient.h>
 
 class GameView : public QGraphicsView
 {
