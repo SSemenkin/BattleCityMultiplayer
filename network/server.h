@@ -12,14 +12,15 @@ public:
 
     bool startServer();
 
-
 signals:
+    void messageReceived(Socket *sender, const QString &message);
 
 protected:
     virtual void onNewConnection();
     virtual void onClientDisconnected();
     virtual void onConnectionError(QTcpSocket::SocketError error);
     virtual void onClientReadyRead();
+    virtual void notificateAll(Socket *sender, const QString &message);
 private:
     QList<Socket*> m_clients;
     QHash<Socket*, QByteArray> m_received;

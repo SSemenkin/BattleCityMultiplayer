@@ -1,7 +1,7 @@
 #ifndef SOCKET_H
 #define SOCKET_H
 
-#define FINISH_TOKEN ;
+#define FINISH_TOKEN ';'
 
 #include <QObject>
 #include <QTcpSocket>
