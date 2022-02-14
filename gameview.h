@@ -3,6 +3,10 @@
 
 #include <QGraphicsView>
 
+
+class Server;
+class MenuScene;
+
 class GameView : public QGraphicsView
 {
     Q_OBJECT
@@ -10,6 +14,8 @@ class GameView : public QGraphicsView
 public:
     GameView(QWidget *parent = nullptr);
     ~GameView();
-
+private:
+    Server *m_server;
+    QScopedPointer<MenuScene> m_menuScene;
 };
 #endif // GAMEVIEW_H

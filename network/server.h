@@ -9,12 +9,9 @@ class Server : public QTcpServer
     Q_OBJECT
 public:
     explicit Server(QObject *parent = nullptr);
-
     bool startServer();
-
 signals:
     void messageReceived(Socket *sender, const QString &message);
-
 protected:
     virtual void onNewConnection();
     virtual void onClientDisconnected();

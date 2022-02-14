@@ -12,11 +12,13 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     gameview.cpp \
+    menuscene.cpp \
     network/server.cpp \
     network/socket.cpp
 
 HEADERS += \
     gameview.h \
+    menuscene.h \
     network/server.h \
     network/socket.h
 
@@ -24,3 +26,6 @@ HEADERS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    r.qrc
