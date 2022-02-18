@@ -19,3 +19,8 @@ MaximizedScene::MaximizedScene(QObject *parent) : QGraphicsScene(parent)
 {
     setSceneRect(qApp->primaryScreen()->geometry());
 }
+
+MaximizedScene::~MaximizedScene()
+{
+    qDebug() << Q_FUNC_INFO;
+}

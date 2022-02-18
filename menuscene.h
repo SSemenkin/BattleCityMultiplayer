@@ -9,6 +9,7 @@ class MaximizedScene : public QGraphicsScene
     Q_OBJECT
 public:
     explicit MaximizedScene(QObject *parent = nullptr);
+    virtual ~MaximizedScene();
 };
 
 class MenuScene : public MaximizedScene
@@ -19,6 +20,13 @@ public:
 
 private:
     QGraphicsPixmapItem *m_logoItem;
+};
+
+class GameplayScene : public MaximizedScene
+{
+    Q_OBJECT
+public:
+    explicit GameplayScene(QObject *parent = nullptr);
 };
 
 #endif // MENUSCENE_H

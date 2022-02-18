@@ -1,12 +1,13 @@
-#include "gameview.h"
 #include <QApplication>
+#include "game.h"
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    GameView w;
-    w.showFullScreen();
+
+    Game game;
+    game.init();
 
     return a.exec();
 }

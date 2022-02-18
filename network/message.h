@@ -8,6 +8,7 @@ class Message
 public:
 
     enum class Type {
+        Unknown = -1,
         RequestStartPosition,
         RequestChangePosition,
         RequestFire
@@ -21,7 +22,7 @@ public:
 
 private:
     QByteArray m_data;
-    Type m_type;
+    Type m_type {Type::Unknown};
 };
 
 #endif // MESSAGE_H

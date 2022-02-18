@@ -1,6 +1,6 @@
 #include "gameview.h"
-#include "network/server.h"
 #include "menuscene.h"
+#include <QDebug>
 
 GameView::GameView(QWidget *parent)
     : QGraphicsView(parent),
@@ -9,10 +9,21 @@ GameView::GameView(QWidget *parent)
     setVerticalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarPolicy::ScrollBarAlwaysOff);
 
-    setScene(&*m_menuScene);
+    setScene(m_menuScene.data());
 }
 
 GameView::~GameView()
 {
+    qDebug() << Q_FUNC_INFO;
+}
+
+QSharedPointer<MenuScene> GameView::menuScene() const
+{
+    return m_menuScene;
+}
+
+QSharedPointer<GameplayScene> GameView::gameplayScene() const
+{
+    return m_gameplayScene;
 }
 

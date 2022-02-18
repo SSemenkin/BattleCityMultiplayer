@@ -1,11 +1,12 @@
 #include "server.h"
 #include <QDataStream>
+#include "network/message.h"
 
-Server::Server(QObject *parent) : QTcpServer(parent)
+Server::Server(Game* instance, QObject *parent) : QTcpServer(parent),
+    m_gameInstance(instance)
 {
     connect(this, &QTcpServer::newConnection, this, &Server::onNewConnection);
     connect(this, &QTcpServer::acceptError, this, &Server::onConnectionError);
-    connect(this, &Server::messageReceived, this, &Server::notificateAll);
 }
 
 bool Server::startServer()
@@ -88,7 +89,21 @@ void Server::checkIsPacketFull(Socket *socket)
     if ((uint64_t)m_received[socket].size() >= m_bufferSize[socket]) {
         QByteArray message = m_received[socket].left(m_bufferSize[socket]);
         m_received[socket] = m_received[socket].right(m_received.size() - m_bufferSize[socket]);
-        emit messageReceived(socket, message);
+        messageReceived(socket, message);
         m_bufferSize[socket] = 0;
+    }
+}
+
+void Server::messageReceived(Socket *socket, const QByteArray &data)
+{
+    Message message(data);
+
+    switch(message.type()) {
+        case Message::Type::RequestChangePosition:
+            break;
+        case Message::Type::RequestFire:
+            break;
+        case Message::Type::RequestStartPosition:
+            break;
     }
 }

@@ -6,6 +6,7 @@
 
 class Server;
 class MenuScene;
+class GameplayScene;
 
 class GameView : public QGraphicsView
 {
@@ -14,8 +15,12 @@ class GameView : public QGraphicsView
 public:
     GameView(QWidget *parent = nullptr);
     ~GameView();
+
+    QSharedPointer<MenuScene> menuScene() const;
+    QSharedPointer<GameplayScene> gameplayScene() const;
+
 private:
-    Server *m_server;
-    QScopedPointer<MenuScene> m_menuScene;
+    QSharedPointer<MenuScene>     m_menuScene;
+    QSharedPointer<GameplayScene> m_gameplayScene;
 };
 #endif // GAMEVIEW_H
