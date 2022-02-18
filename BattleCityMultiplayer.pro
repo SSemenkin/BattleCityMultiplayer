@@ -13,12 +13,14 @@ SOURCES += \
     main.cpp \
     gameview.cpp \
     menuscene.cpp \
+    network/message.cpp \
     network/server.cpp \
     network/socket.cpp
 
 HEADERS += \
     gameview.h \
     menuscene.h \
+    network/message.h \
     network/server.h \
     network/socket.h
 

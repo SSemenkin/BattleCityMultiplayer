@@ -1,4 +1,5 @@
 #include "server.h"
+#include <QDataStream>
 
 Server::Server(QObject *parent) : QTcpServer(parent)
 {
@@ -39,28 +40,55 @@ void Server::onConnectionError(QAbstractSocket::SocketError error)
 
 void Server::onClientReadyRead()
 {
-    if (Socket *socket = static_cast<Socket*>(sender())) {
-        QByteArray &buffer = m_received[socket];
-        buffer.append(socket->readAll());
+    Socket *socket = qobject_cast<Socket*>(sender());
+    if (!socket) {
+        return;
+    }
 
-        while(true) {
-            int endIndex = buffer.indexOf(FINISH_TOKEN);
-            if (endIndex == -1) {
-                break;
-            }
+    if (m_bufferSize[socket] == 0) {
+        if (socket->bytesAvailable() >= sizeof(uint64_t)) {
+            m_bufferSize[socket] = (uint64_t)socket->read(sizeof (uint64_t)).toInt();
+            checkIsPacketFull(socket);
+        }
+    } else {
+        checkIsPacketFull(socket);
+    }
+//    if (Socket *socket = static_cast<Socket*>(sender())) {
+//        QByteArray &buffer = m_received[socket];
+//        buffer.append(socket->readAll());
 
-            QString message = QString::fromUtf8(buffer.left(endIndex));
-            buffer.remove(0, endIndex + 1);
-            emit messageReceived(socket, message);
+//        while(true) {
+//            int endIndex = buffer.indexOf(FINISH_TOKEN);
+//            if (endIndex == -1) {
+//                break;
+//            }
+
+//            QString message = QString::fromUtf8(buffer.left(endIndex));
+//            buffer.remove(0, endIndex + 1);
+//            emit messageReceived(socket, message);
+//        }
+//    }
+}
+
+void Server::notificateAll(Socket *except, const QByteArray &message)
+{
+    QDataStream dataStream;
+    for (int i = 0; i < m_clients.size(); ++i) {
+        if (except != m_clients[i]) {
+            dataStream.setDevice(m_clients[i]);
+            dataStream << (uint64_t) message.size() << message;
         }
     }
 }
 
-void Server::notificateAll(Socket *except, const QString &message)
+void Server::checkIsPacketFull(Socket *socket)
 {
-    for (int i = 0; i < m_clients.size(); ++i) {
-        if (except != m_clients[i]) {
-            m_clients[i]->write(message.toUtf8() + FINISH_TOKEN);
-        }
+    m_received[socket].append(socket->readAll());
+
+    if ((uint64_t)m_received[socket].size() >= m_bufferSize[socket]) {
+        QByteArray message = m_received[socket].left(m_bufferSize[socket]);
+        m_received[socket] = m_received[socket].right(m_received.size() - m_bufferSize[socket]);
+        emit messageReceived(socket, message);
+        m_bufferSize[socket] = 0;
     }
 }
