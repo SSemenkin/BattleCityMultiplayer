@@ -1,7 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <QObject>
 #include "gameview.h"
 #include "network/socket.h"
 
@@ -17,7 +16,6 @@ public:
 signals:
 
 private:
-
     QScopedPointer<GameView> m_gameView;
 };
 

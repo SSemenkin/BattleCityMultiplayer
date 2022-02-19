@@ -3,7 +3,6 @@
 
 #include <QGraphicsView>
 
-
 class Server;
 class MenuScene;
 class GameplayScene;

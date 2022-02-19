@@ -12,7 +12,6 @@ public:
         RequestStartPosition,
         RequestChangePosition,
         RequestFire
-
     };
 
     explicit Message(const QByteArray &);
