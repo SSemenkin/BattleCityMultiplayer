@@ -1,0 +1,3 @@
+[submodule "third_party/qamqp"]
+	path = third_party/qamqp
+	url = https://github.com/SSemenkin/qamqp.git
